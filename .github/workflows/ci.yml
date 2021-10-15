@@ -12,8 +12,8 @@ jobs:
       status: success
     steps:
       - run: |
-        ref="${GITHUB_HEAD_REF:-$GITHUB_REF}"
-        echo "SHORT_REF=${ref/\*\//}" >> $GITHUB_ENV
+        ref=${GITHUB_HEAD_REF:-$GITHUB_REF}
+        echo "SHORT_REF=${ref\*\//}" >> $GITHUB_ENV
         echo "SHORT_SHA=${GITHUB_SHA:0:7}" >> $GITHUB_ENV
         echo "SHORT_REPO=${GITHUB_REPOSITORY/*\//}" >> $GITHUB_ENV
         echo "RUN_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_ENV
