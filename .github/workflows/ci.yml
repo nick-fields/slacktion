@@ -11,7 +11,7 @@ jobs:
     env:
       status: success
     steps:
-      - run: |
+      - run: |-
         if [ -z "$GITHUB_HEAD_REF" ];then
           ref="${GITHUB_HEAD_REF}"
         else
