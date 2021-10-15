@@ -15,6 +15,7 @@ jobs:
           echo "SHORT_REF=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
           echo "SHORT_SHA=${GITHUB_SHA:0:7}" >> $GITHUB_ENV
           echo "SHORT_REPO=${GITHUB_REPOSITORY/*\//}" >> $GITHUB_ENV
+          echo "RUN_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_ENV
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
@@ -37,7 +38,7 @@ jobs:
             Branch|<https://github.com/${{ github.repository }}/tree/${{ github.ref }}~~${{ env.SHORT_REF }}>
             SHA|<https://github.com/${{ github.repository }}/tree/${{ github.sha }}~~${{ env.SHORT_SHA }}>
           buttons: |
-            Button 1|https://google.com
+            Build|${{ env. RUN_URL }}
             Button 2|https://bing.com
       - name: Minimal configuration
         uses: ./
