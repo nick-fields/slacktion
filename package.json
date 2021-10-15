@@ -1,0 +1,30 @@
+{
+  "name": "slack-action",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build src/index.ts -o out",
+    "run": "node -r ts-node/register -r dotenv-extended/config src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "@types/node": "^16.11.0",
+    "@zeit/ncc": "^0.22.3",
+    "axios": "^0.19.2",
+    "dotenv": "^10.0.0",
+    "dotenv-extended": "^2.9.0",
+    "husky": "^7.0.2",
+    "ts-node": "^10.3.0",
+    "typescript": "^4.4.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run build && git add ."
+    }
+  }
+}

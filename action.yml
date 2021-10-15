@@ -1,0 +1,47 @@
+name: Slacktion
+description: "Yet another Slack Action, this one supports interactive elements such as buttons and links."
+inputs:
+  slack_bot_token:
+    description: "Slack bot token with at least `chat:write` scope."
+    required: true
+  channel:
+    description: "Slack channel to post to.  Bot user will auto join the channel if public.  If private channel, bot user must be invited."
+    required: true
+  job_status:
+    description: "Status of the current job.  Use the [job.status](https://help.github.com/en/actions/reference/contexts-and-expression-syntax-for-github-actions#job-context) context."
+    required: true
+  text:
+    description: "Text of the message. Appears above the pretext for whatever reason."
+    required: false
+  pretext:
+    description: "Pretext appears below the text field and above the attachment."
+    required: false
+  title:
+    description: "Title of the attachment section.  Displays in bold."
+    required: false
+  title_url:
+    description: "Url to embed in attachment section title"
+    required: false
+  image_url:
+    description: "Image to include below footer and above actions"
+    required: false
+  footer:
+    description: "Text to include below fields and above actions"
+    required: false
+    default: GitHub Actions
+  footer_icon_url:
+    description: "Icon to include with footer"
+    required: false
+    default: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+  fields:
+    description: "Fields to be displayed in a table inside the attachment (separate text from content with pipe, add link to content with <url~~text> format; ex: Field 1|<google.com~~text>)"
+    required: false
+  buttons:
+    description: "Buttons attached to the message (separate text from link with pipe; ex: Button1|google.com)"
+    required: false
+runs:
+  using: node12
+  main: out/index.js
+branding:
+  icon: slack
+  color: green
