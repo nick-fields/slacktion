@@ -43,5 +43,5 @@ runs:
   using: node12
   main: out/index.js
 branding:
-  icon: slack
+  icon: message-circle
   color: green
