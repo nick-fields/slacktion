@@ -1963,19 +1963,31 @@ function runAction(opts) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    fields = opts.fields.split("\n").map(function (f) {
+                    fields = opts.fields
+                        .trim()
+                        .split("\n")
+                        .filter(function (b) { return ("" + b).trim().length > 0; })
+                        .map(function (f) {
+                        var _a, _b;
+                        console.log("field: " + f);
                         return {
                             short: true,
-                            title: f.split("|")[0].replace("~~", "|"),
-                            value: f.split("|")[1].replace("~~", "|"),
+                            title: (_a = f.split("|")[0]) === null || _a === void 0 ? void 0 : _a.replace("~~", "|"),
+                            value: (_b = f.split("|")[1]) === null || _b === void 0 ? void 0 : _b.replace("~~", "|"),
                         };
                     });
-                    actions = opts.buttons.split("\n").map(function (b) {
+                    actions = opts.buttons
+                        .trim()
+                        .split("\n")
+                        .filter(function (b) { return ("" + b).trim().length > 0; })
+                        .map(function (b) {
+                        var _a, _b;
+                        console.log("button: " + b);
                         return {
                             style: "default",
                             type: "button",
-                            text: b.split("|")[0].replace("~~", "|"),
-                            url: b.split("|")[1].replace("~~", "|"),
+                            text: (_a = b.split("|")[0]) === null || _a === void 0 ? void 0 : _a.replace("~~", "|"),
+                            url: (_b = b.split("|")[1]) === null || _b === void 0 ? void 0 : _b.replace("~~", "|"),
                         };
                     });
                     body = {

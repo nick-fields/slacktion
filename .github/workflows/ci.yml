@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  ci:
+    runs-on: [ubuntu-latest]
+    env:
+      status: success
+    steps:
+      - run: |
+          echo "SHORT_REF=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+          echo "SHORT_SHA=${GITHUB_SHA:0:7}" >> $GITHUB_ENV
+          echo "SHORT_REPO=${GITHUB_REPOSITORY/*\//}" >> $GITHUB_ENV
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: All fields configured
+        uses: ./
+        with:
+          slack_bot_token: ${{ secrets.SLACK_BOT_TOKEN }}
+          channel: ${{ secrets.SLACK_CHANNEL }}
+          job_status: ${{ env.status }}
+          text: "${{ env.status }} test: text *text* _text_"
+          pretext: pretext *pretext* _pretext_
+          title: title *title* _title_
+          title_url: https://google.com
+          image_url: https://live.staticflickr.com/65535/26338881111_635425673d_b.jpg
+          footer: footer
+          footer_icon_url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+          fields: |
+            Repo|<https://github.com/${{ github.repository }}~~${{ env.SHORT_REPO }}>
+            Branch|<https://github.com/${{ github.repository }}/tree/${{ github.ref }}~~${{ env.SHORT_REF }}>
+            SHA|<https://github.com/${{ github.repository }}/tree/${{ github.sha }}~~${{ env.SHORT_SHA }}>
+          buttons: |
+            Button 1|https://google.com
+            Button 2|https://bing.com
+      - name: Minimal configuration
+        uses: ./
+        with:
+          slack_bot_token: ${{ secrets.SLACK_BOT_TOKEN }}
+          channel: ${{ secrets.SLACK_CHANNEL }}
+          job_status: ${{ env.status }}
+          text: "${{ env.status }} test: text *text* _text_"

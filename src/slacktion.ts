@@ -101,21 +101,31 @@ async function request(
 }
 
 export async function runAction(opts: ActionOptions) {
-  const fields = opts.fields.split("\n").map((f) => {
-    return {
-      short: true,
-      title: f.split("|")[0].replace("~~", "|"),
-      value: f.split("|")[1].replace("~~", "|"),
-    };
-  });
-  const actions = opts.buttons.split("\n").map((b) => {
-    return {
-      style: "default",
-      type: "button",
-      text: b.split("|")[0].replace("~~", "|"),
-      url: b.split("|")[1].replace("~~", "|"),
-    };
-  });
+  const fields = opts.fields
+    .trim()
+    .split("\n")
+    .filter((b) => `${b}`.trim().length > 0)
+    .map((f) => {
+      console.log(`field: ${f}`);
+      return {
+        short: true,
+        title: f.split("|")[0]?.replace("~~", "|"),
+        value: f.split("|")[1]?.replace("~~", "|"),
+      };
+    });
+  const actions = opts.buttons
+    .trim()
+    .split("\n")
+    .filter((b) => `${b}`.trim().length > 0)
+    .map((b) => {
+      console.log(`button: ${b}`);
+      return {
+        style: "default",
+        type: "button",
+        text: b.split("|")[0]?.replace("~~", "|"),
+        url: b.split("|")[1]?.replace("~~", "|"),
+      };
+    });
   const body: SlackMessage = {
     channel: opts.channel,
     text: opts.text,
