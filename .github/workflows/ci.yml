@@ -12,8 +12,7 @@ jobs:
       status: success
     steps:
       - run: |
-        export ref=${GITHUB_HEAD_REF:-$GITHUB_REF}
-
+        export ref="${GITHUB_HEAD_REF:-$GITHUB_REF}"
         echo "SHORT_REF=${ref/\*\//}" >> $GITHUB_ENV
         echo "SHORT_SHA=${GITHUB_SHA:0:7}" >> $GITHUB_ENV
         echo "SHORT_REPO=${GITHUB_REPOSITORY/*\//}" >> $GITHUB_ENV
