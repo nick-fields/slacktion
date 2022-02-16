@@ -70,7 +70,7 @@ The following example shows all options configured
   with:
     node-version: "12.x"
 - name: All fields configured
-  uses: nick-invision/slacktion@v1
+  uses: nick-fields/slacktion@v1
   with:
     # only token authentication is supported
     slack_bot_token: ${{ secrets.SLACK_BOT_TOKEN }}
