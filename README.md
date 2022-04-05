@@ -100,3 +100,4 @@ The following example shows all options configured
 Here's the result of the above configuration
 
 ![Example](./example.png)
+
